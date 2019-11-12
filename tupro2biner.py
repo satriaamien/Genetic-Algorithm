@@ -93,6 +93,9 @@ def decode(suhu,waktu,langit,lembap,kondisi):
 		temp.append(["normal"])
 	elif (suhu == [0,0,1]):
 		temp.append(["rendah"])
+	elif (suhu == [0,0,0]):
+		temp.append(["rendah"])
+
 
 	if (waktu ==[1,1,1,1]):
 		temp.append(["pagi","siang","sore","malam"])
@@ -124,6 +127,9 @@ def decode(suhu,waktu,langit,lembap,kondisi):
 		temp.append(["sore"])
 	elif (waktu==[0,0,0,1]):
 		temp.append(["malam"])
+	elif (waktu==[0,0,0,0]):
+		temp.append(["malam"])
+
 
 	if (langit ==[1,1,1,1]):
 		temp.append(["berawan","cerah","hujan","rintik"])
@@ -155,6 +161,8 @@ def decode(suhu,waktu,langit,lembap,kondisi):
 		temp.append(["hujan"])
 	elif (langit==[0,0,0,1]):
 		temp.append(["rintik"])
+	elif (langit==[0,0,0,0]):
+		temp.append(["rintik"])
 
 	if (lembap==[1,1,1]):
 		temp.append(["tinggi","normal","rendah"])
@@ -169,6 +177,10 @@ def decode(suhu,waktu,langit,lembap,kondisi):
 	elif (lembap == [0,1,0]):
 		temp.append(["normal"])
 	elif (lembap == [0,0,1]):
+		temp.append(["rendah"])
+	elif (lembap == [0,0,1]):
+		temp.append(["rendah"])
+	elif(lembap == [0,0,0]):
 		temp.append(["rendah"])
 
 	if (kondisi== [1]):
@@ -194,35 +206,49 @@ def matching(bariscsv,getdecode):
 	print "xxx", bariscsv[0]
 	a,b,c,d,e=0,0,0,0,0
 	for i in range(len(bariscsv)):
-			getbaris=bariscsv[i]  #mendapatkan baris pertama csv & mengulang sebanyak csv(5)
-		for x in range(len(getdecode)): #penghitungan SUHU
-			arraysuhu=getdecode[x] #mendapatkan data suhu
-			for y in range(len(arraysuhu)):
-				tiapsuhu=arraysuhu[y] # data tiap suhu
+		getbaris=bariscsv[i]  #mendapatkan baris pertama csv & mengulang sebanyak csv(5)
+		# for x in range(len(getdecode)): #penghitungan SUHU
+		# 	array=getdecode[x] #mendapatkan data array
+		if (i==0):
+			for y in range(len(getdecode[0])):
+				tiapsuhu=getdecode[y]# data tiap suhu
 				if (getbaris[0] == tiapsuhu): #dicocokkan jk benar nambah 1
 					a=a+1
 				else:
 					a=a+0
-		for x in range():#penghitungan WAKTU
-			pass
-
-
-
-
-
-				# splitdecode = getdecode[x]
-				# # for i in range(1,10):
-				# if (bariscsv == splitdecode)  
-				# 	a=a+1
-				# else:
-				# 	a=a+0
-
-				# for i in range(len(splitdecode)):
-		
-	# for x in range(len(csv)):
-	# 	if (getdecode == ["tinggi","normal","rendah"] and (csv[x] =="tinggi" or csv[x]=="normal" or csv[x]=="rendah")):
-	# 		suhu =suhu + 1
-	# 	elif(getdecode 45== ["tinggi","normal"] and (csv[]))			
+		if (i==1):
+			for y in range(len(getdecode[1])):
+				tiapwaktu=getdecode[y]# data tiap waktu
+				if (getbaris[1] == tiapsuhu): #dicocokkan jk benar nambah 1
+					b=b+1
+				else:
+					b=b+0
+		if (i==2):
+			for y in range(len(getdecode[2])):
+				tiaplangit=getdecode[y]# data tiap langit
+				if (getbaris[2] == tiapsuhu): #dicocokkan jk benar nambah 1
+					c=c+1
+				else:
+					c=c+0
+		if (i==3):
+			for y in range(len(getdecode[3])):
+				tiaplembap = getdecode[y]# data tiap lembap
+				if (getbaris[3] == tiapsuhu): #dicocokkan jk benar nambah 1
+					d=d+1
+				else:
+					d=d+0					
+		if (i==4):
+			for y in range(len(getdecode[4])):
+				tiapkondisi = getdecode[y]# data tiap kondisi
+				if (getbaris[4] == tiapsuhu): #dicocokkan jk benar nambah 1
+					e=e+1
+				else:
+					e=e+0
+	if (5==a+b+c+d+e):
+		get = True
+	else:
+		get = False
+	return get
 	
 def spliterrule(rule,csv):
 	print "s",rule
