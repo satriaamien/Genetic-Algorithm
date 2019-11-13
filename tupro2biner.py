@@ -218,6 +218,7 @@ def matching(bariscsv,getdecode):
 			decoderule=getdecode[w] #baris decode
 			for x in range(len(column)):#perulangan di tiap kolom baris csv 
 				getbaris=column #baris csv
+
 				if (x==0):
 					for y in range(len(decoderule[0])):
 						tiapsuhu=decoderule[0][y]# data tiap suhu
@@ -249,19 +250,22 @@ def matching(bariscsv,getdecode):
 				if (x==4):
 					for y in range(len(decoderule[4])):
 						tiapkondisi = decoderule[4][y]# data tiap kondisi
-						# print "esok",getbaris[4]
-					# if (getbaris[4] == tiapkondisi): #dicocokkan jk benar nambah 1
-						e=e+1
-					else:
-						e=e+0
+						if (getbaris[4] == tiapkondisi): #dicocokkan jk benar nambah 1
+							e=e+1
+						else:
+							e=e+0
 			if (a+b+c+d+e==5):
 				get = True
+				a,b,c,d,e=0,0,0,0,0
 				break
 			else:
 				get = False
+				a,b,c,d,e=0,0,0,0,0
 		if (get == True):
 			getfit = getfit + 1
-	return getfit
+		else:
+			getfit = getfit + 0
+	return getfit*(1.25/100)
 
 def spliterrule(rule):
 	getdecode=[]
@@ -287,7 +291,7 @@ def spliterrule(rule):
 			
 
 populasi=[]
-temp=[]
+tempe=[]
 populasi = kromosom()
 filecsv=openfile()
 # print filecsv
@@ -301,6 +305,9 @@ for pop in range(len(populasi)):
 	decodekromosom = spliterrule(getsplit)
 	print matching(filecsv,decodekromosom)
 	break
+# 	tempe.append(matching(filecsv,decodekromosom))
+# print tempe
+	# break
 	# for i in getdecode:	
 	# 	print "getdecode", getdecode
 	# spliterrule(getsplit)
