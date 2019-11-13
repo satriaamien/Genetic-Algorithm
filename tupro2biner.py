@@ -304,9 +304,9 @@ for pop in range(len(populasi)):
 	getsplit = list(spliter(populasi[pop]))
 	decodekromosom = spliterrule(getsplit)
 	print matching(filecsv,decodekromosom)
-	break
-# 	tempe.append(matching(filecsv,decodekromosom))
-# print tempe
+ 	tempe.append(matching(filecsv,decodekromosom))
+print tempe
+	# break
 	# break
 	# for i in getdecode:	
 	# 	print "getdecode", getdecode
