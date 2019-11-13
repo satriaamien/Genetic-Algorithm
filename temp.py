@@ -200,71 +200,66 @@ def decode(suhu,waktu,langit,lembap,kondisi):
 	# for x in range(len(splitcode)):
 	# 	if (splitcode[x] == )
 
-# def coditionmatching():
-
 
 def matching(bariscsv,getdecode):
 # suhu,waktu,langit,lembap,kondisi=0,0,0,0,0
-	print getdecode
-	print "===================="
 	for i in getdecode:
 		print getdecode
 	print "xxx", bariscsv[0]
-	a,b,c,d,e,getfit=0,0,0,0,0,0
+	a,b,c,d,e=0,0,0,0,0
 	for i in range(len(bariscsv)):
-		column=bariscsv[i]#baris csv
-		print "column -",i," ",bariscsv[i]
-		for w in range(len(getdecode)):# perulangan setiap rule di kromosom
-			decoderule=getdecode[w] #baris decode
-			for x in range(len(column)):#perulangan di tiap kolom baris csv 
-				getbaris=column #baris csv
-				if (x==0):
-					for y in range(len(decoderule[0])):
-						tiapsuhu=decoderule[0][y]# data tiap suhu
-						if (getbaris[0] == tiapsuhu): #dicocokkan jk benar nambah 1
-							a=a+1
-						else:
-							a=a+0
-				if (x==1):
-					for y in range(len(decoderule[1])):
-						tiapwaktu=decoderule[1][y]# data tiap waktu
-						if (getbaris[1] == tiapwaktu): #dicocokkan jk benar nambah 1
-							b=b+1
-						else:
-							b=b+0
-				if (x==2):
-					for y in range(len(decoderule[2])):
-						tiaplangit=decoderule[2][y]# data tiap langit
-						if (getbaris[2] == tiaplangit): #dicocokkan jk benar nambah 1
-							c=c+1
-						else:
-							c=c+0
-				if (x==3):
-					for y in range(len(decoderule[3])):
-						tiaplembap = decoderule[3][y]# data tiap lembap
-						if (getbaris[3] == tiaplembap): #dicocokkan jk benar nambah 1
-							d=d+1
-						else:
-							d=d+0					
-				if (x==4):
-					for y in range(len(decoderule[4])):
-						tiapkondisi = decoderule[4][y]# data tiap kondisi
-						# print "esok",getbaris[4]
-					# if (getbaris[4] == tiapkondisi): #dicocokkan jk benar nambah 1
-						e=e+1
-					else:
-						e=e+0
-			if (a+b+c+d+e==5):
-				get = True
-				break
-			else:
-				get = False
-		if (get == True):
-			getfit = getfit + 1
-	return getfit
+		print "bariscsv -",i," ",bariscsv[i]
+		getbaris=bariscsv[i] #mendapatkan baris pertama csv & mengulang sebanyak csv(5)
+		if (i==0):
+			for y in range(len(getdecode[0])):
+				tiapsuhu=getdecode[y]# data tiap suhu
+				if (getbaris[0] == tiapsuhu): #dicocokkan jk benar nambah 1
+					a=a+1
+				else:
+					a=a+0
+		if (i==1):
+			for y in range(len(getdecode[1])):
+				tiapwaktu=getdecode[y]# data tiap waktu
+				if (getbaris[1] == tiapsuhu): #dicocokkan jk benar nambah 1
+					b=b+1
+				else:
+					b=b+0
+		if (i==2):
+			for y in range(len(getdecode[2])):
+				tiaplangit=getdecode[y]# data tiap langit
+				if (getbaris[2] == tiapsuhu): #dicocokkan jk benar nambah 1
+					c=c+1
+				else:
+					c=c+0
+		if (i==3):
+			for y in range(len(getdecode[3])):
+				tiaplembap = getdecode[y]# data tiap lembap
+				if (getbaris[3] == tiapsuhu): #dicocokkan jk benar nambah 1
+					d=d+1
+				else:
+					d=d+0					
+		if (i==4):
+			for y in range(len(getdecode[4])):
+				tiapkondisi = getdecode[y]# data tiap kondisi
+				if (getbaris[4] == tiapsuhu): #dicocokkan jk benar nambah 1
+					e=e+1
+				else:
+					e=e+0
+	if (5==a+b+c+d+e):
+		get = True
+	else:
+		get = False
+	return get
 
-def spliterrule(rule):
-	getdecode=[]
+def spliterrule(rule,csv):
+	for ee in rule:
+		print "konco",ee
+	asik =[]
+	# suhu=[]
+	# waktu=[]
+	# langit=[]
+	# lembap=[]
+	# kondisi=[]
 	for x in range(len(rule)):
 		print "x",x
 		temp = rule[x]
@@ -273,11 +268,10 @@ def spliterrule(rule):
 		langit= temp[7:11]
 		lembap = temp[11:14]
 		kondisi= temp[14]
-		getdecode.append(decode(suhu,waktu,langit,lembap,kondisi))
-	return getdecode
-
-		# # bariscsv = csv[x]
-		# matching(csv,getdecode)
+		getdecode = decode(suhu,waktu,langit,lembap,kondisi)
+		print "getdecode", getdecode
+		# bariscsv = csv[x]
+		matching(csv,getdecode)
 
 		# print "ss",matching(csv,getdecode)
 		# print matching(baris,getdecode)
@@ -298,11 +292,9 @@ print populasi
 print "==="
 for pop in range(len(populasi)):
 	getsplit = list(spliter(populasi[pop]))
-	decodekromosom = spliterrule(getsplit)
-	print matching(filecsv,decodekromosom)
+	temp.append(getsplit)
+	spliterrule(getsplit,filecsv)
 	break
-	# for i in getdecode:	
-	# 	print "getdecode", getdecode
 	# spliterrule(getsplit)
 
 
