@@ -243,29 +243,37 @@ def roulete(fit):
 
 def crossover2(gettipot,p1,p2):
 	print "yoi",gettipot
-	x=gettipot[0]
-	y=gettipot[1]
-	getp1=[]
-	temp1=[]
-	temp2=[]
-	print "xx",x
-	print "yy",y
-	temp1.extend(p1)
-	print ("temp1",temp1)
-	temp2.extend(p2)
-	print ("temp2",temp2)
-	p1[x:y]=p2[x:y]
-	# getp1.extend(get)
+	# x=gettipot[0]
+	# y=gettipot[1]
+	# getp1=[]
+	# temp1=[]
+	# temp2=[]
+	# a,b,c,iteration=0,0,0,0
+	# print "xx",x
+	# print "yy",y
+	# temp1.extend(p1)
+	# print ("temp1",temp1)
+	# temp2.extend(p2)
+	# print ("temp2",temp2)
+	# p1[x:y]=p2[x:y]
+	# fix=y+1
 
-	print "p1",p1
-	while (y<50):
-		temp2[x:y]=temp1[x:y]
-		y+=1
-		print y
-		if ((len(temp2)%15)==0):
-			break
-	print "p2",temp2
-	return p1,temp2
+	# a=temp2[:x]
+	# print a
+	# b=temp1[x:y]
+
+	# c=temp2[y:]
+	# total=a+b+c
+	# print "www",len(total)
+	# if (len(total) % 15 != 0):
+	# 	while (total % 15 != 0) and (iteration<30):
+	# 		y+=1
+	# 		a=temp2[:x]
+	# 		b=temp1[x:y]
+	# 		c=temp2[y:]
+	# 		total=a+b+c
+	# 	iteration+=1
+	# return total
 
 def crossover1(gettipot,p1,p2):
 	temp=[]
@@ -279,7 +287,7 @@ def tipot(p1,p2):
 	x =0
 	y =0	
 	while (x==y) or (x>=y):
-		x = random.randint(0,(len(p1)//2)-1)
+		x = random.randint(0,(len(p1)//2)-2)
 		y = random.randint(0,len(p2))
 		if(x<=y):
 			tipotparent1= [x,y]
@@ -299,10 +307,21 @@ def tipot(p1,p2):
 	print "c",c
 	d=[tipotparent1[1]-modulo,tipotparent1[1]]
 	print "d",d
-	if ((tipotparent1[0]<15) and (tipotparent1[1]>=15)) or ((tipotparent1[0]<15) and (tipotparent1[1]>=15)):
-		return crossover1(a,p1,p2)
-	elif (tipotparent1[0]<15) and (tipotparent1[1]<15):
-		return crossover2(b,p1,p2)	
+	# if ((tipotparent1[0]<15) and (tipotparent1[1]>=15)) or ((tipotparent1[0]<15) and (tipotparent1[1]>=15)):
+	if ((tipotparent1[0]<15) and (tipotparent1[1]>=15)) and ((a[0]<15 and a[1]>=15) or (c[0]<15 and c[1]>=15)) 
+		# return crossover1(a,p1,p2)
+		temp=[]
+		x=a[0]
+		y=a[1]
+		p1[x:y],p2[x:y]=p2[x:y],p1[x:y]
+		return p1,p2
+	# elif (tipotparent1[0]<15) and (tipotparent1[1]<15):
+	if (a[0]<15 and a[1]>=15) and (b[0]<15 and b[1]<15):
+		x1=a[0]
+		x2=a[1]
+		x2=b[0]
+		y2=b[1]
+		return crossover2(b,p1,p2)
 	elif(tipotparent1[0]>=15) and (tipotparent1[1]>=15):
 		return d
 	# return titikpotong
