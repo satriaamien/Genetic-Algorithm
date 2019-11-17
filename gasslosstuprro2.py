@@ -13,12 +13,18 @@ def rule():
 	rule=[]
 	pilih=[0,1]
 	pilih2=[30]
+	# for x in range(15):
+	# 	rule.append(random.choice(pilih))
+	# return rule
 	rule=[random.choice(pilih) for x in range(random.choice(pilih2))]
 	return rule
 
 def kromosom():
 	kromosom=[]
 	pilih=random.randint(2,4)
+	# for x in range(pilih):
+	# 	kromosom.append(rule())
+	# return kromosom
 	kromosom=[rule() for x in range(pilih)]
 	return kromosom
 
@@ -142,6 +148,11 @@ def decode(suhu,waktu,langit,lembap,kondisi):
 	return temp
 
 def matching(bariscsv,getdecode):
+	# print(getdecode)
+	# print("====================")
+	# for i in getdecode:
+	# 	print(i)
+	# print ("xxx", bariscsv[0])
 	a,b,c,d,e,getfit=0,0,0,0,0,0
 	for i in range(len(bariscsv)):
 		column=bariscsv[i]#baris csv
@@ -200,6 +211,7 @@ def matching(bariscsv,getdecode):
 	return getfit
 
 def valuefitness(x):
+
 	hasilfit = x*(1.25/100)
 	return hasilfit
 
@@ -208,6 +220,7 @@ def spliterrule(rule):#decode rule
 	for x in range(len(rule)):
 		print("x",x)
 		temp = rule[x]
+		print(temp,"tempee")
 		suhu = temp[:3]
 		waktu = temp[3:7]
 		langit= temp[7:11]
@@ -228,6 +241,40 @@ def roulete(fit):
 		i +=1
 	return i-1
 
+# def crossover2(gettipot,p1,p2):
+# 	print "yoi",gettipot
+# 	x=gettipot[0]
+# 	y=gettipot[1]
+# 	getp1=[]
+# 	temp1=[]
+# 	temp2=[]
+# 	a,b,c,iteration=0,0,0,0
+# 	print "xx",x
+# 	print "yy",y
+# 	temp1.extend(p1)
+# 	print ("temp1",temp1)
+# 	temp2.extend(p2)
+# 	print ("temp2",temp2)
+# 	p1[x:y]=p2[x:y]
+# 	fix=y+1
+
+# 	a=temp2[:x]
+# 	print a
+# 	b=temp1[x:y]
+
+# 	c=temp2[y:]
+# 	total=a+b+c
+# 	print "www",len(total)
+# 	if (len(total) % 15 != 0):
+# 		while (total % 15 != 0) and (iteration<30):
+# 			y+=1
+# 			a=temp2[:x]
+# 			b=temp1[x:y]
+# 			c=temp2[y:]
+# 			total=a+b+c
+# 		iteration+=1
+# 	return total
+
 def crossover1(gettipot,p1,p2):
 	temp=[]
 	x=gettipot[0]
@@ -245,39 +292,39 @@ def tipot(p1,p2):
 		if(x<=y and x!=y):
 			tipotparent1= [x,y]
 			break
-	# print "x,y",x,y
-	# print "0",tipotparent1[0]
-	# print "1",tipotparent1[1]
+	print "x,y",x,y
+	print "0",tipotparent1[0]
+	print "1",tipotparent1[1]
 	selisih=tipotparent1[1]-tipotparent1[0]
-	# print "sel",selisih
+	print "sel",selisih
 	modulo= selisih % 15
-	# print "modulo",modulo
+	print "modulo",modulo
 	a=[tipotparent1[0],tipotparent1[0]+selisih]
-	# print "a",a
+	print "a",a
 	b=[tipotparent1[0],tipotparent1[0]+modulo]
-	# print "b",b
+	print "b",b
 	c=[tipotparent1[1]-selisih,tipotparent1[1]]
-	# print "c",c
+	print "c",c
 	d=[tipotparent1[1]-modulo,tipotparent1[1]]
-	# print "d",d
+	print "d",d
 	if ((a[0]<15 and a[1]>=15) and ((b[0]<15 and b[1]>=15))):
-		# print"123"
+		print"123"
 		return crossover1(a,p1,p2)
 	if (a[0]<15) and (a[1]>=15) and (b[0]<15 and b[1]<15):
-		# print"23"
+		print"23"
 		ptg1kiri=a[0]
 		ptg1kanan=a[1]
 		temp1=[]
 		temp2=[]
 		temp1.extend(p1)
 		temp2.extend(p2)
-		print("p1 sebelum",temp1)
-		print("p2 sebelum", temp2)
+		print"p1 sebelum",temp1
+		print"p2 sebelum", temp2
 		# print"p2 sebelum",temp2
-		print("ptg1kiri",ptg1kiri)
-		print("ptg1kanan",ptg1kanan)
+		print"ptg1kiri",ptg1kiri
+		print"ptg1kanan",ptg1kanan
 		temp1[ptg1kiri:ptg1kanan]=temp2[ptg1kiri:ptg1kanan]
-		print("p1 sesudah",temp1)
+		print"p1 sesudah",temp1
 		# print"p2 sesudah",temp2
 		###########################
 		arrp1=[]
@@ -286,34 +333,38 @@ def tipot(p1,p2):
 		arrp2.extend(p2)
 		ptg2kiri=b[0]
 		ptg2kanan=b[1]	
-		print("ptg2kiri",ptg2kiri)	
-		print("ptg2kanan",ptg2kanan)
+		print"ptg2kiri",ptg2kiri	
+		print"ptg2kanan",ptg2kanan
 		q=arrp2[:ptg2kiri]
-		print ("q",len(q))
+		print "q",len(q)
 		w=arrp1[ptg1kiri:ptg1kanan]
-		print("ptg1kiri",ptg1kiri)
-		print("ptg1kanan",ptg1kanan)
-		print ("w",len(w))
+		print"ptg1kiri",ptg1kiri
+		print"ptg1kanan",ptg1kanan
+		print "w",len(w)
 		e=arrp2[ptg2kanan:]
-		print ("e",len(e))
+		print "e",len(e)
 		total=q+w+e
 		if (len(total) % 15 != 0):
 			i=0
 			while((i<=100) and (len(total) % 15 != 0)):
-				print("total proses",total)
+				print"total proses",total
 				if (len(total)%15==0):
 					break
 				else:
 					ptg1kanan+=1
 					q=temp2[:ptg2kanan]
-
+					print "qq",len(q)
 					w=p1[ptg1kiri:ptg1kanan]
+					print "ww",len(w)
 					e=temp2[ptg2kanan:]
+					print "ee",len(e)
 					total=q+w+e
+					print "totot",len(total)
 				i+=1
 
-		return temp1,total
+		return temp1,total#,total
 	else:
+		print("get another")
 		return crossover1(a,p1,p2)
 
 
@@ -324,12 +375,17 @@ def mutation(parent):
 	val2=random.randrange(0,30)
 	prb1=random.random()
 	prb2=random.random()
+	print"prb1",prb1
+	print"prb2",prb2
+	print"val1",val1
+	print"val2",val2
 	for x in range(len(mut1)):
 		if (x==val1) and (prb1<=0.7):
 			if (mut1[x]==0):
-				
+				print"ewe"
 				mut1[x]=1
 			else:
+				print"kuntl"
 				mut1[x]=0
 	for y in range(len(mut2)):
 		if (y==val2) and (prb2<=0.7):
@@ -348,27 +404,65 @@ totalfitness=[]
 nilaifitness=[]
 filecsv=openfile()
 
-print(populasi)
-print("===")
+# print(populasi)
+# print("===")
+# for pop in range(len(populasi)):
+# 	getsplit = list(spliter(populasi[pop]))
+# 	decodekromosom = spliterrule(getsplit)
+# 	totalfitness.append(matching(filecsv,decodekromosom))
+
+# # for x in range(len(totalfitness)):
+# # 	nilaifitness.append(valuefitness(totalfitness[x]))
+
+# print "fitness",totalfitness
+# p1=roulete(totalfitness)
+# p2=roulete(totalfitness)
+# print "p1,p2",p1,p2
+# getcrossover = tipot(populasi[p1],populasi[p2])
+# print "ss",getcrossover[0]
+# print "ss",getcrossover[1]
+# getmutation= mutation(getcrossover)
+# print(getmutation)
+
 for x in range(1):
-	tmpgen=[]
-	for totpop in range(1):
+	tempgen=[]
+	populasi=[]
+	populasi = kromosom()
+	totalfitness=[]
+	nilaifitness=[]
+	filecsv=openfile()
+	for totpopulasi in range(1):
 		for pop in range(len(populasi)):
 			getsplit = list(spliter(populasi[pop]))
+			print"populassaaw",getsplit
 			decodekromosom = spliterrule(getsplit)
+			print(decodekromosom)
 			totalfitness.append(matching(filecsv,decodekromosom))
-		print ("fitness",totalfitness)
-		p1=roulete(totalfitness)
-		p2=roulete(totalfitness)
-		print ("p1,p2",p1,p2)
-		getcrossover = tipot(populasi[p1],populasi[p2])
-		print ("ss",getcrossover[0])
-		print ("ss",getcrossover[1])
-		getmutation= mutation(getcrossover)
-		print(getmutation)
-		tmpgen.append(getmutation)
-	populasi=tmpgen
-print (totalfitness[0]*(1.25/100))
-print("kromosom terbaik",populasi[0])
+			print "fitness",totalfitness
+			p1=roulete(totalfitness)
+			p2=roulete(totalfitness)
+			print("pop",populasi)
+			print "p1,p2",p1,p2
+			getcrossover = tipot(populasi[p1],populasi[p2])
+			print "ss",getcrossover[0]
+			print "ss",getcrossover[1]
+			getmutation= mutation(getcrossover)
+			tempgen.append(getmutation)
+		print("q",tempgen)
+		populasi = tempgen
+
+# crossover(titikpotong)
+
+# print nilaifitness
+# print nilaifitness
+
+# 	tempe.append(matching(filecsv,decodekromosom))
+# print tempe
+	# break
+	# for i in getdecode:	
+	# 	print "getdecode", getdecode
+	# spliterrule(getsplit)
+
+
 
 
